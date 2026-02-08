@@ -16,23 +16,64 @@ button:hover { background: #e05656; }
 /* ABAS */
 .aba-conteudo { display: none; padding: 20px; animation: fadeIn 0.5s; }
 .aba-conteudo.ativa { display: block; }
-.grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-.card { background: white; padding: 20px; border-radius: 15px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.05); cursor: pointer; }
-.emoji { font-size: 2.5rem; }
+
+/* NAVBAR */
 .navbar { position: fixed; bottom: 0; left: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 10px 0; box-shadow: 0 -2px 10px rgba(0,0,0,0.05); border-top-left-radius: 20px; border-top-right-radius: 20px; }
 .nav-btn { background: none; border: none; color: #aaa; display: flex; flex-direction: column; align-items: center; font-size: 0.8rem; padding: 5px; cursor: pointer; }
 .nav-btn .icon { font-size: 1.5rem; margin-bottom: 2px; }
 .nav-btn.ativo { color: #ff6b6b; font-weight: bold; }
 
-/* AGENDA (Novo Estilo) */
+/* --- NOVO ESTILO: LISTA DE CARTAS --- */
+.botao-lista {
+    width: 100%;
+    background: white;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1rem;
+    color: #444;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    transition: transform 0.2s;
+}
+.botao-lista:hover { transform: scale(1.02); background: #fff0f3; }
+.seta { color: #ff6b6b; font-weight: bold; }
+
+/* --- NOVO ESTILO: ÁREA DE LEITURA --- */
+.btn-voltar {
+    background: none;
+    color: #ff6b6b;
+    border: 2px solid #ff6b6b;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+    cursor: pointer;
+    display: inline-block;
+}
+.papel-carta {
+    background: white;
+    padding: 30px;
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    border-top: 5px solid #ff6b6b;
+    line-height: 1.6;
+    min-height: 300px;
+}
+.papel-carta h2 { color: #d63349; font-family: 'Dancing Script', cursive; font-size: 2rem; margin-top: 0; }
+.papel-carta p { white-space: pre-wrap; /* Respeita parágrafos e quebras de linha */ }
+
+/* AGENDA */
 .form-agenda { display: flex; flex-direction: column; gap: 15px; background: white; padding: 20px; border-radius: 15px; border-left: 5px solid #ff6b6b; }
 .form-agenda label { font-weight: bold; color: #ff6b6b; margin-bottom: -10px; text-align: left; }
 .form-agenda input, .form-agenda textarea { width: 100%; padding: 12px; border: 2px solid #eee; border-radius: 10px; font-family: 'Poppins', sans-serif; resize: none; box-sizing: border-box; }
 .btn-enviar { width: 100%; border-radius: 50px; }
 
-/* MODAL E GALERIA */
-.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 3000; justify-content: center; align-items: center; }
-.modal-content { background: white; padding: 30px; border-radius: 15px; width: 80%; max-width: 400px; position: relative; }
-.close-btn { position: absolute; top: 10px; right: 15px; font-size: 25px; cursor: pointer; }
+/* GALERIA */
 .galeria img { width: 100%; border-radius: 10px; }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
