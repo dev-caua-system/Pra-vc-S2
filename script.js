@@ -1,31 +1,78 @@
-// CONFIGURAÇÕES
+// --- CONFIGURAÇÕES ---
 const SENHA_CORRETA = "22072020";
 const DATA_INICIO_NAMORO = new Date("2020-07-22T00:00:00"); 
 
-// LOGIN
+// --- CONTROLE DO YOUTUBE ---
+var player;
+function onYouTubeIframeAPIReady() {
+    player = new YT.Player('youtube-player', {
+        height: '0',
+        width: '0',
+        videoId: '9bgyuqM4LcU', // ID da música (Aliança - Tribalistas)
+        playerVars: {
+            'autoplay': 0,
+            'controls': 0,
+            'loop': 1,
+            'playlist': '9bgyuqM4LcU' // Necessário para o loop funcionar
+        },
+        events: {
+            'onReady': onPlayerReady
+        }
+    });
+}
+
+function onPlayerReady(event) {
+    // O player está pronto, mas espera a senha para tocar
+    player.setVolume(50); // Volume em 50%
+}
+
+function toggleMusic() {
+    if (player && player.getPlayerState() == 1) { // 1 = Tocando
+        player.pauseVideo();
+    } else {
+        player.playVideo();
+    }
+}
+
+// --- LOGIN ---
 function checkPassword() {
     const input = document.getElementById("password-input").value.trim();
     const errorMsg = document.getElementById("error-msg");
-    const musica = document.getElementById("musica-fundo");
 
     if (input === SENHA_CORRETA) {
         document.getElementById("login-screen").style.display = "none";
         document.getElementById("app-content").style.display = "block";
-        if(musica) musica.play().catch(e => console.log("Autoplay bloqueado"));
+        
+        // Toca a música do YouTube
+        if (player) {
+            player.playVideo();
+        }
+        
         iniciarContador();
     } else {
         errorMsg.style.display = "block";
+        // Efeito de tremer
+        const box = document.querySelector('.login-box');
+        box.animate([
+            { transform: 'translateX(0)' },
+            { transform: 'translateX(-10px)' },
+            { transform: 'translateX(10px)' },
+            { transform: 'translateX(0)' }
+        ], { duration: 300 });
     }
 }
 
-// NAVEGAÇÃO ENTRE ABAS
+// --- NAVEGAÇÃO ENTRE ABAS ---
 function mudarAba(idAba) {
     document.querySelectorAll(".aba-conteudo").forEach(aba => aba.classList.remove("ativa"));
     document.querySelectorAll(".nav-btn").forEach(btn => btn.classList.remove("ativo"));
 
     document.getElementById(idAba).classList.add("ativa");
 
-    // Destaca o botão certo (0=Cartas, 1=Fotos, 2=Sobre, 3=Agenda)
+    if (idAba !== 'aba-cartas') {
+        voltarParaLista();
+    }
+
     const buttons = document.querySelectorAll(".nav-btn");
     if(idAba === 'aba-cartas') buttons[0].classList.add("ativo");
     if(idAba === 'aba-fotos') buttons[1].classList.add("ativo");
@@ -33,23 +80,39 @@ function mudarAba(idAba) {
     if(idAba === 'aba-agenda') buttons[3].classList.add("ativo");
 }
 
-// CARTAS
+// --- CARTAS E LEITURA ---
 const cartas = {
-    'saudade': { titulo: "Sinto sua falta...", texto: "Amor, a saudade é grande...\nTe amo!" },
-    'triste': { titulo: "Ei, psiu...", texto: "Não fica assim. Estou aqui com você." },
-    'brava': { titulo: "Me perdoa?", texto: "Desculpa se fui chato. Vamos ficar bem? ❤️" },
-    'feliz': { titulo: "Sua felicidade é tudo!", texto: "Aproveite muito esse momento!" }
+    'saudade': { 
+        titulo: "Quando sentir saudade...", 
+        texto: "Meu amor,\n\nA saudade é a prova de que tudo valeu a pena. Logo estaremos juntos novamente.\n\nTe amo!" 
+    },
+    'triste': { 
+        titulo: "Quando estiver triste...", 
+        texto: "Ei, não fica assim. Lembre-se do quanto você é forte e especial para mim.\n\nEstou aqui com você sempre." 
+    },
+    'brava': { 
+        titulo: "Quando estiver brava...", 
+        texto: "Desculpa se eu vacilei. Vamos conversar e resolver isso? Não gosto de ficar mal com você. ❤️" 
+    },
+    'feliz': { 
+        titulo: "Quando estiver feliz...", 
+        texto: "Sua felicidade é a minha! Aproveite cada segundo desse momento incrível." 
+    }
 };
 
-function openLetter(tipo) {
-    document.getElementById("modal-title").innerText = cartas[tipo].titulo;
-    document.getElementById("modal-body").innerText = cartas[tipo].texto;
-    document.getElementById("letter-modal").style.display = "flex";
+function lerCarta(tipo) {
+    document.getElementById("menu-cartas").style.display = "none";
+    document.getElementById("area-leitura").style.display = "block";
+    document.getElementById("titulo-leitura").innerText = cartas[tipo].titulo;
+    document.getElementById("texto-leitura").innerText = cartas[tipo].texto;
 }
-function closeLetter() { document.getElementById("letter-modal").style.display = "none"; }
-window.onclick = function(e) { if (e.target == document.getElementById("letter-modal")) closeLetter(); }
 
-// CONTADOR CRONÔMETRO
+function voltarParaLista() {
+    document.getElementById("area-leitura").style.display = "none";
+    document.getElementById("menu-cartas").style.display = "block";
+}
+
+// --- CRONÔMETRO ---
 function iniciarContador() {
     setInterval(() => {
         const agora = new Date();
@@ -65,11 +128,7 @@ function iniciarContador() {
         const m = minutos < 10 ? '0'+minutos : minutos;
         const s = segundos < 10 ? '0'+segundos : segundos;
 
-        document.getElementById("contador").innerText = `${anos} Anos, ${dias} Dias e\n${h}:${m}:${s}`;
+        const contador = document.getElementById("contador");
+        if(contador) contador.innerText = `${anos} Anos, ${dias} Dias e\n${h}:${m}:${s}`;
     }, 1000);
-}
-
-function toggleMusic() {
-    const musica = document.getElementById("musica-fundo");
-    musica.paused ? musica.play() : musica.pause();
 }
