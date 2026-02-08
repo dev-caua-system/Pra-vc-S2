@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Nós ❤️</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div id="login-screen">
+        <div class="login-box">
+            <h1>❤️ Área Restrita ❤️</h1>
+            <p>Digite a nossa data especial (apenas números):</p>
+            <input type="password" id="password-input" placeholder="Ex: 01012024">
+            <button onclick="checkPassword()">Entrar</button>
+            <p id="error-msg">Senha incorreta, amor!</p>
+        </div>
+    </div>
+
+    <div id="main-content" style="display: none;">
+        <header>
+            <h1>Nossa Caixa de Memórias</h1>
+            <p>Escolha uma carta para ler...</p>
+        </header>
+
+        <div class="grid-container">
+            <div class="card" onclick="openLetter('saudade')">
+                <div class="emoji">🥺</div>
+                <h3>Ler quando sentir saudade</h3>
+            </div>
+
+            <div class="card" onclick="openLetter('triste')">
+                <div class="emoji">😢</div>
+                <h3>Ler quando estiver triste</h3>
+            </div>
+
+            <div class="card" onclick="openLetter('brava')">
+                <div class="emoji">😠</div>
+                <h3>Ler quando estiver brava</h3>
+            </div>
+
+            <div class="card" onclick="openLetter('feliz')">
+                <div class="emoji">🥰</div>
+                <h3>Ler quando estiver feliz</h3>
+            </div>
+            
+             <div class="card" onclick="openLetter('nos')">
+                <div class="emoji">👩‍❤️‍💋‍👨</div>
+                <h3>Sobre nós (Futuro)</h3>
+            </div>
+        </div>
+    </div>
+
+    <div id="letter-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeLetter()">&times;</span>
+            <h2 id="modal-title">Título</h2>
+            <div id="modal-body">Texto aqui...</div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
