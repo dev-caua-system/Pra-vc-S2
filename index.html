@@ -11,7 +11,6 @@
 
     <audio id="musica-fundo" loop>
         <source src="musica.mp3" type="audio/mpeg">
-        Seu navegador não suporta áudio.
     </audio>
 
     <div id="login-screen">
@@ -40,56 +39,70 @@
                 <div class="grid-container">
                     <div class="card" onclick="openLetter('saudade')">
                         <div class="emoji">🥺</div>
-                        <h3>Ler quando sentir saudade</h3>
+                        <h3>Saudade</h3>
                     </div>
                     <div class="card" onclick="openLetter('triste')">
                         <div class="emoji">😢</div>
-                        <h3>Ler quando estiver triste</h3>
+                        <h3>Tristeza</h3>
                     </div>
                     <div class="card" onclick="openLetter('brava')">
                         <div class="emoji">😠</div>
-                        <h3>Ler quando estiver brava</h3>
+                        <h3>Brava</h3>
                     </div>
                     <div class="card" onclick="openLetter('feliz')">
                         <div class="emoji">🥰</div>
-                        <h3>Ler quando estiver feliz</h3>
+                        <h3>Felicidade</h3>
                     </div>
                 </div>
             </section>
 
             <section id="aba-fotos" class="aba-conteudo">
                 <h2>📸 Nossos Momentos</h2>
-                <p>Momentos que eu nunca vou esquecer...</p>
                 <div class="galeria">
                     <img src="foto.jpg" class="foto-galeria">
-                    </div>
+                </div>
             </section>
 
             <section id="aba-sobre" class="aba-conteudo">
                 <h2>👩‍❤️‍💋‍👨 Sobre Nós</h2>
                 <div class="texto-sobre">
-                    <p>Desde o dia que te conheci, minha vida mudou...</p>
-                    <p>Contador de dias juntos: <b id="contador">Calculando...</b></p>
+                    <p>Contador de dias juntos:</p>
+                    <b id="contador" style="font-size: 1.2rem; color: #ff6b6b;">Calculando...</b>
+                    <br><br>
                     <button onclick="toggleMusic()" class="btn-musica">🎵 Pausar/Tocar Música</button>
                 </div>
+            </section>
+
+            <section id="aba-agenda" class="aba-conteudo">
+                <h2>📅 Nossa Agenda</h2>
+                <p>Escreva o que quiser, amor. Chega no meu e-mail!</p>
+                
+                <form action="https://formspree.io/f/mzdazbke" method="POST" class="form-agenda">
+                    <label>Assunto:</label>
+                    <input type="text" name="assunto" placeholder="Ex: Tive uma ideia..." required>
+
+                    <label>Mensagem:</label>
+                    <textarea name="mensagem" placeholder="Querido diário..." rows="5" required></textarea>
+
+                    <button type="submit" class="btn-enviar">💌 Enviar</button>
+                </form>
             </section>
         </main>
 
         <nav class="navbar">
             <button onclick="mudarAba('aba-cartas')" class="nav-btn ativo">
-                <span class="icon">💌</span>
-                <span>Cartas</span>
+                <span class="icon">💌</span><span>Cartas</span>
             </button>
             <button onclick="mudarAba('aba-fotos')" class="nav-btn">
-                <span class="icon">📸</span>
-                <span>Fotos</span>
+                <span class="icon">📸</span><span>Fotos</span>
             </button>
             <button onclick="mudarAba('aba-sobre')" class="nav-btn">
-                <span class="icon">❤️</span>
-                <span>Nós</span>
+                <span class="icon">❤️</span><span>Nós</span>
+            </button>
+            <button onclick="mudarAba('aba-agenda')" class="nav-btn">
+                <span class="icon">📅</span><span>Agenda</span>
             </button>
         </nav>
-
     </div>
 
     <div id="letter-modal" class="modal">
