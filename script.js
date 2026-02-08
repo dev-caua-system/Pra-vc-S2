@@ -131,3 +131,37 @@ function iniciarContador() {
         contadorElement.innerText = dias + " dias de puro amor!";
     }
 }
+
+// --- CONTADOR DE DIAS (TIPO CRONÔMETRO) ---
+function iniciarContador() {
+    // Data exata do início do namoro (22/07/2020)
+    const dataInicio = new Date("2020-07-22T00:00:00"); 
+
+    // Atualiza o contador a cada 1 segundo
+    setInterval(() => {
+        const agora = new Date();
+        const diferenca = agora - dataInicio; // Diferença em milissegundos
+
+        // Cálculos matemáticos para extrair o tempo
+        const anos = Math.floor(diferenca / (1000 * 60 * 60 * 24 * 365.25));
+        const dias = Math.floor((diferenca % (1000 * 60 * 60 * 24 * 365.25)) / (1000 * 60 * 60 * 24));
+        const horas = Math.floor((diferenca % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutos = Math.floor((diferenca % (1000 * 60 * 60)) / (1000 * 60));
+        const segundos = Math.floor((diferenca % (1000 * 60)) / 1000);
+
+        // Deixa os números bonitos com zero na frente (ex: 05 segundos)
+        const h = horas < 10 ? '0' + horas : horas;
+        const m = minutos < 10 ? '0' + minutos : minutos;
+        const s = segundos < 10 ? '0' + segundos : segundos;
+
+        // Monta o texto final
+        const texto = `${anos} Anos, ${dias} Dias e\n${h}:${m}:${s}`;
+        
+        // Escreve na tela
+        const contadorElement = document.getElementById("contador");
+        if (contadorElement) {
+            contadorElement.innerText = texto;
+        }
+    }, 1000); // 1000 milissegundos = 1 segundo
+}
+
