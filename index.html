@@ -5,13 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Para o Meu Amor ❤️</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://www.youtube.com/iframe_api"></script>
 </head>
 <body>
 
-    <audio id="musica-fundo" loop>
-        <source src="musica.mp3" type="audio/mpeg">
-    </audio>
+    <div id="youtube-player" style="position: absolute; top: -9999px; left: -9999px;"></div>
 
     <div id="login-screen">
         <div class="login-box">
@@ -35,23 +34,29 @@
 
         <main>
             <section id="aba-cartas" class="aba-conteudo ativa">
-                <h2>💌 Cartas para você</h2>
-                <div class="grid-container">
-                    <div class="card" onclick="openLetter('saudade')">
-                        <div class="emoji">🥺</div>
-                        <h3>Saudade</h3>
-                    </div>
-                    <div class="card" onclick="openLetter('triste')">
-                        <div class="emoji">😢</div>
-                        <h3>Tristeza</h3>
-                    </div>
-                    <div class="card" onclick="openLetter('brava')">
-                        <div class="emoji">😠</div>
-                        <h3>Brava</h3>
-                    </div>
-                    <div class="card" onclick="openLetter('feliz')">
-                        <div class="emoji">🥰</div>
-                        <h3>Felicidade</h3>
+                <div id="menu-cartas">
+                    <h2>💌 Suas Leituras</h2>
+                    <p style="text-align: center; font-size: 0.9rem; color: #888; margin-bottom: 20px;">Escolha um momento...</p>
+                    
+                    <button class="botao-lista" onclick="lerCarta('saudade')">
+                        <span>🥺 Ler quando sentir saudade</span><span class="seta">></span>
+                    </button>
+                    <button class="botao-lista" onclick="lerCarta('triste')">
+                        <span>😢 Ler quando estiver triste</span><span class="seta">></span>
+                    </button>
+                    <button class="botao-lista" onclick="lerCarta('brava')">
+                        <span>😠 Ler quando estiver brava</span><span class="seta">></span>
+                    </button>
+                    <button class="botao-lista" onclick="lerCarta('feliz')">
+                        <span>🥰 Ler quando estiver feliz</span><span class="seta">></span>
+                    </button>
+                </div>
+
+                <div id="area-leitura" style="display: none;">
+                    <button onclick="voltarParaLista()" class="btn-voltar">⬅ Voltar</button>
+                    <div class="papel-carta">
+                        <h2 id="titulo-leitura">Título</h2>
+                        <p id="texto-leitura">Texto...</p>
                     </div>
                 </div>
             </section>
@@ -76,41 +81,22 @@
             <section id="aba-agenda" class="aba-conteudo">
                 <h2>📅 Nossa Agenda</h2>
                 <p>Escreva o que quiser, amor. Chega no meu e-mail!</p>
-                
                 <form action="https://formspree.io/f/mzdazbke" method="POST" class="form-agenda">
                     <label>Assunto:</label>
                     <input type="text" name="assunto" placeholder="Ex: Tive uma ideia..." required>
-
                     <label>Mensagem:</label>
                     <textarea name="mensagem" placeholder="Querido diário..." rows="5" required></textarea>
-
                     <button type="submit" class="btn-enviar">💌 Enviar</button>
                 </form>
             </section>
         </main>
 
         <nav class="navbar">
-            <button onclick="mudarAba('aba-cartas')" class="nav-btn ativo">
-                <span class="icon">💌</span><span>Cartas</span>
-            </button>
-            <button onclick="mudarAba('aba-fotos')" class="nav-btn">
-                <span class="icon">📸</span><span>Fotos</span>
-            </button>
-            <button onclick="mudarAba('aba-sobre')" class="nav-btn">
-                <span class="icon">❤️</span><span>Nós</span>
-            </button>
-            <button onclick="mudarAba('aba-agenda')" class="nav-btn">
-                <span class="icon">📅</span><span>Agenda</span>
-            </button>
+            <button onclick="mudarAba('aba-cartas')" class="nav-btn ativo"><span class="icon">💌</span><span>Cartas</span></button>
+            <button onclick="mudarAba('aba-fotos')" class="nav-btn"><span class="icon">📸</span><span>Fotos</span></button>
+            <button onclick="mudarAba('aba-sobre')" class="nav-btn"><span class="icon">❤️</span><span>Nós</span></button>
+            <button onclick="mudarAba('aba-agenda')" class="nav-btn"><span class="icon">📅</span><span>Agenda</span></button>
         </nav>
-    </div>
-
-    <div id="letter-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeLetter()">&times;</span>
-            <h2 id="modal-title">Título</h2>
-            <div id="modal-body">Texto aqui...</div>
-        </div>
     </div>
 
     <script src="script.js"></script>
