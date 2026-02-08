@@ -1,36 +1,53 @@
 // --- CONFIGURAÇÕES ---
-const SENHA_CORRETA = "22072020"; // Senha atualizada!
-const DATA_INICIO_NAMORO = new Date("2020-07-22"); // Data ajustada para o cálculo de dias
+const SENHA_CORRETA = "22072020"; // Sua data especial
+const DATA_INICIO_NAMORO = new Date("2020-07-22"); // Ano-Mês-Dia (Formato Americano: AAAA-MM-DD)
 
 // --- LOGIN & MÚSICA ---
 function checkPassword() {
-    const input = document.getElementById("password-input").value;
-    const errorMsg = document.getElementById("error-msg"); // Pega o elemento da mensagem de erro
+    // Pega o que foi digitado e remove espaços em branco antes ou depois (.trim())
+    const input = document.getElementById("password-input").value.trim();
+    
+    // Elementos da tela
     const loginScreen = document.getElementById("login-screen");
     const appContent = document.getElementById("app-content");
+    const errorMsg = document.getElementById("error-msg");
     const musica = document.getElementById("musica-fundo");
 
+    // DEBUG: Se quiser ver no Console o que está acontecendo (F12)
+    console.log("Senha digitada:", input);
+    console.log("Senha correta:", SENHA_CORRETA);
+
     if (input === SENHA_CORRETA) {
-        // Se a senha estiver certa:
-        loginScreen.style.display = "none"; // Esconde o login
+        // --- SENHA CERTA ---
+        loginScreen.style.display = "none"; // Esconde login
         appContent.style.display = "block"; // Mostra o site
         
         // Tenta tocar a música
         if(musica) {
-            musica.play().catch(error => console.log("O navegador bloqueou o autoplay, clique no botão para tocar."));
+            musica.volume = 0.5; // Volume em 50%
+            musica.play().catch(error => {
+                console.log("Autoplay bloqueado. O usuário precisa interagir.");
+            });
         }
         
-        iniciarContador();
+        iniciarContador(); // Inicia a contagem de dias
     } else {
-        // Se a senha estiver errada:
-        errorMsg.style.display = "block"; // MOSTRA a mensagem de erro agora
-        // Efeito simples de tremer
+        // --- SENHA ERRADA ---
+        errorMsg.style.display = "block"; // Mostra mensagem de erro
+        errorMsg.innerText = "Senha incorreta! Tente: " + SENHA_CORRETA; // (Opcional: mostra a dica se errar muito)
+        
+        // Efeito de tremer a tela
         const box = document.querySelector('.login-box');
-        box.style.transform = "translateX(5px)";
-        setTimeout(() => { box.style.transform = "translateX(0)"; }, 100);
+        box.animate([
+            { transform: 'translateX(0)' },
+            { transform: 'translateX(-10px)' },
+            { transform: 'translateX(10px)' },
+            { transform: 'translateX(0)' }
+        ], { duration: 300 });
     }
 }
 
+// --- FUNÇÃO PARA O BOTÃO DE MÚSICA ---
 function toggleMusic() {
     const musica = document.getElementById("musica-fundo");
     if (musica.paused) {
@@ -41,38 +58,50 @@ function toggleMusic() {
 }
 
 // --- NAVEGAÇÃO ENTRE ABAS ---
-function mudarAba(idAba) {
+function mudarAba(idAba, event) {
     // Esconde todas as abas
     document.querySelectorAll(".aba-conteudo").forEach(aba => {
         aba.classList.remove("ativa");
     });
-    // Tira o destaque dos botões
+    // Tira o destaque de todos os botões
     document.querySelectorAll(".nav-btn").forEach(btn => {
         btn.classList.remove("ativo");
     });
 
-    // Mostra a aba certa e destaca o botão
+    // Mostra a aba certa
     document.getElementById(idAba).classList.add("ativa");
     
-    // Procura o botão certo para destacar (correção da lógica anterior)
-    const buttons = document.querySelectorAll(".nav-btn");
-    if(idAba === 'aba-cartas') buttons[0].classList.add("ativo");
-    if(idAba === 'aba-fotos') buttons[1].classList.add("ativo");
-    if(idAba === 'aba-sobre') buttons[2].classList.add("ativo");
+    // Destaca o botão clicado (se o evento for passado)
+    if (event) {
+        event.currentTarget.classList.add("ativo");
+    }
 }
 
-// --- CARTAS ---
+// --- TEXTOS DAS CARTAS ---
 const cartas = {
-    'saudade': { titulo: "Sinto sua falta...", texto: "Amor, a saudade é grande, mas o amor é maior...\n\nMal posso esperar para te ver de novo!" },
-    'triste': { titulo: "Ei, psiu...", texto: "Não fica assim. Lembre-se que eu estou aqui e você é a pessoa mais forte que eu conheço." },
-    'brava': { titulo: "Me perdoa?", texto: "Eu sei que fui chato. Desculpa por qualquer coisa. Te amo muito!" },
-    'feliz': { titulo: "Sua felicidade é a minha!", texto: "Ver você sorrindo ilumina meu dia. Aproveite muito esse momento!" }
+    'saudade': { 
+        titulo: "Sinto sua falta...", 
+        texto: "Amor, a saudade é grande, mas lembre-se que cada dia longe é um dia a menos para estarmos juntos de novo.\n\nTe amo demais!" 
+    },
+    'triste': { 
+        titulo: "Ei, psiu...", 
+        texto: "Não fica assim. Respire fundo. Você é forte, incrível e eu estou aqui com você para tudo." 
+    },
+    'brava': { 
+        titulo: "Me perdoa?", 
+        texto: "Eu sei que sou cabeça dura às vezes. Desculpa se te chateei. Vamos ficar bem? ❤️" 
+    },
+    'feliz': { 
+        titulo: "Sua felicidade é tudo!", 
+        texto: "Ver você feliz ilumina meu dia. Aproveite muito esse momento, você merece o mundo!" 
+    }
 };
 
+// --- ABRIR E FECHAR CARTAS ---
 function openLetter(tipo) {
+    const modal = document.getElementById("letter-modal");
     const title = document.getElementById("modal-title");
     const body = document.getElementById("modal-body");
-    const modal = document.getElementById("letter-modal");
 
     title.innerText = cartas[tipo].titulo;
     body.innerText = cartas[tipo].texto;
@@ -83,7 +112,7 @@ function closeLetter() {
     document.getElementById("letter-modal").style.display = "none";
 }
 
-// Fechar ao clicar fora
+// Fechar ao clicar fora do papel
 window.onclick = function(event) {
     const modal = document.getElementById("letter-modal");
     if (event.target == modal) {
@@ -94,8 +123,8 @@ window.onclick = function(event) {
 // --- CONTADOR DE DIAS ---
 function iniciarContador() {
     const agora = new Date();
-    const diferenca = agora - DATA_INICIO_NAMORO;
-    const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
+    const diferenca = agora - DATA_INICIO_NAMORO; // Diferença em milissegundos
+    const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24)); // Converte para dias
     
     const contadorElement = document.getElementById("contador");
     if(contadorElement) {
