@@ -142,6 +142,14 @@ button:hover { background: #e05656; }
 
 /* GALERIA */
 .galeria { display: flex; flex-direction: column; gap: 15px; }
+
+#contador {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #ff6b6b;
+    white-space: pre-line; /* Permite pular linha */
+}
 .foto-galeria { width: 100%; border-radius: 10px; }
 
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
