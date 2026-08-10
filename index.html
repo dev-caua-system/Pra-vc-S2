@@ -1,32 +1,16 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#e84573">
-<title>Para Adryanne ❤️</title>
-<link rel="stylesheet" href="style.css">
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<script src="https://www.youtube.com/iframe_api"></script>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#e84573"><title>Para Adryanne ❤️</title>
+<link rel="stylesheet" href="style.css"><link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"><script src="https://www.youtube.com/iframe_api"></script>
 </head>
-<body>
-<div id="youtube-player"></div>
-<div class="hearts" aria-hidden="true"></div>
-
-<div id="app-content">
-<header class="hero-mini">
-<div class="foto-perfil-container"><img src="foto.jpg" class="foto-perfil" alt="Adryanne e Cauã"></div>
-<p class="eyebrow">Nosso cantinho</p><h1>Nosso Mundo ❤️</h1><p>Um lugar feito para guardar um pouquinho da nossa história.</p>
-</header>
+<body><div id="youtube-player"></div><div class="hearts" aria-hidden="true"></div><div id="app-content">
+<header class="hero-mini"><div class="foto-perfil-container"><img src="foto.jpg" class="foto-perfil" alt="Adryanne e Cauã"></div><p class="eyebrow">Nosso cantinho</p><h1>Nosso Mundo ❤️</h1><p>Um lugar feito para guardar um pouquinho da nossa história.</p></header>
 <main>
 <section id="aba-cartas" class="aba-conteudo ativa"><div id="menu-cartas"><p class="eyebrow">Para cada momento</p><h2>💌 Minhas cartas para você</h2><p class="subtexto">Escolha uma carta para ler quando precisar de um pouquinho de mim.</p><button class="botao-lista" onclick="lerCarta('saudade')"><span>🥺 Ler quando sentir saudade</span><span class="seta">→</span></button><button class="botao-lista" onclick="lerCarta('triste')"><span>😢 Ler quando estiver triste</span><span class="seta">→</span></button><button class="botao-lista" onclick="lerCarta('brava')"><span>😠 Ler quando estiver brava</span><span class="seta">→</span></button><button class="botao-lista" onclick="lerCarta('feliz')"><span>🥰 Ler quando estiver feliz</span><span class="seta">→</span></button></div><div id="area-leitura" style="display:none;"><button onclick="voltarParaLista()" class="btn-voltar">← Voltar</button><div class="papel-carta"><div class="carta-coracao">♥</div><h2 id="titulo-leitura">Título</h2><p id="texto-leitura">Texto...</p><div class="assinatura">Com carinho, Cauã ❤️</div></div></div></section>
-<section id="aba-fotos" class="aba-conteudo"><p class="eyebrow">Nossos momentos</p><h2>📸 Coisas que quero guardar</h2><p class="subtexto">Alguns momentos podem ficar aqui para sempre.</p><div class="galeria"><img src="foto.jpg" class="foto-galeria" alt="Nosso momento"></div></section>
+<section id="aba-fotos" class="aba-conteudo"><p class="eyebrow">Nossos momentos</p><h2>📸 Coisas que quero guardar</h2><p class="subtexto">Alguns momentos podem ficar aqui para sempre.</p><div class="galeria"><img src="foto.jpg" class="foto-galeria" alt="Nosso momento"></div><div class="em-breve">📷 <strong>Galeria compartilhada</strong><br><span>Em breve... estamos preparando esse cantinho para vocês.</span></div></section>
 <section id="aba-sobre" class="aba-conteudo"><p class="eyebrow">A nossa história</p><h2>👩‍❤️‍💋‍👨 Sobre nós</h2><div class="sobre-card"><p>Nosso tempo juntos</p><b id="contador">Calculando...</b><p class="frase-sobre">“Que isso seja apenas o começo de muitos momentos bonitos.” ❤️</p><button onclick="toggleMusic()" class="btn-musica">🎵 Pausar / Tocar nossa música</button></div></section>
-<section id="aba-agenda" class="aba-conteudo"><p class="eyebrow">Um espaço só nosso</p><h2>📅 Nossa Agenda</h2><p class="subtexto">Escreva o que quiser. Sua mensagem chega no meu e-mail.</p><form action="https://formspree.io/f/mzdazbke" method="POST" class="form-agenda"><label>Assunto</label><input type="text" name="assunto" placeholder="Ex: Tive uma ideia..." required><label>Mensagem</label><textarea name="mensagem" placeholder="Querido diário..." rows="5" required></textarea><button type="submit" class="btn-enviar">💌 Enviar</button></form></section>
-</main>
-<nav class="navbar"><button onclick="mudarAba('aba-cartas')" class="nav-btn ativo"><span class="icon">💌</span><span>Cartas</span></button><button onclick="mudarAba('aba-fotos')" class="nav-btn"><span class="icon">📸</span><span>Fotos</span></button><button onclick="mudarAba('aba-sobre')" class="nav-btn"><span class="icon">❤️</span><span>Nós</span></button><button onclick="mudarAba('aba-agenda')" class="nav-btn"><span class="icon">📅</span><span>Agenda</span></button></nav>
-</div>
-<script src="script.js"></script>
-<script>const hearts=document.querySelector('.hearts');function criarCoracao(){const h=document.createElement('div');h.className='float-heart';h.textContent=Math.random()>.3?'♥':'♡';h.style.left=Math.random()*100+'vw';h.style.animationDuration=(5+Math.random()*6)+'s';h.style.fontSize=(12+Math.random()*18)+'px';hearts.appendChild(h);setTimeout(()=>h.remove(),12000)}setInterval(criarCoracao,1000);</script>
-</body>
-</html>
+<section id="aba-agenda" class="aba-conteudo"><p class="eyebrow">Um espaço só nosso</p><h2>📅 Um recadinho para mim</h2><p class="subtexto">Escreva qualquer coisa que queira me contar. Não precisa ter ideia de um recado, pode deixar vazio. :)</p><form action="https://formspree.io/f/mzdazbke" method="POST" class="form-agenda"><label for="mensagem">Seu recado</label><textarea id="mensagem" name="mensagem" placeholder="Escreva aqui quando quiser..." rows="7"></textarea><button type="submit" class="btn-enviar">💌 Enviar recado</button></form></section>
+</main><nav class="navbar"><button onclick="mudarAba('aba-cartas')" class="nav-btn ativo"><span class="icon">💌</span><span>Cartas</span></button><button onclick="mudarAba('aba-fotos')" class="nav-btn"><span class="icon">📸</span><span>Fotos</span></button><button onclick="mudarAba('aba-sobre')" class="nav-btn"><span class="icon">❤️</span><span>Nós</span></button><button onclick="mudarAba('aba-agenda')" class="nav-btn"><span class="icon">📅</span><span>Recado</span></button></nav></div>
+<script src="script.js"></script><script>const hearts=document.querySelector('.hearts');function criarCoracao(){const h=document.createElement('div');h.className='float-heart';h.textContent=Math.random()>.3?'♥':'♡';h.style.left=Math.random()*100+'vw';h.style.animationDuration=(5+Math.random()*6)+'s';h.style.fontSize=(12+Math.random()*18)+'px';hearts.appendChild(h);setTimeout(()=>h.remove(),12000)}setInterval(criarCoracao,1000);</script>
+</body></html>
